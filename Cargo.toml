@@ -1,0 +1,37 @@
+[workspace]
+members = ["crates/*"]
+resolver = "3"
+
+[workspace.package]
+authors = ["e4ac"]
+categories = ["command-line-utilities"]
+description = "Git Tools"
+edition = "2024"
+keywords = ["git"]
+license = "GPL-3.0-or-later"
+readme = "README.md"
+repository = "https://github.com/e4ac/git-tools"
+version = "0.1.0"
+
+[workspace.dependencies]
+clap = { features = ["derive"], version = "4.6" }
+git-test-util = { path = "crates/git-test-util" }
+gix = { version = "0.85" }
+serde = { features = ["derive"], version = "1.0" }
+serde_json = { version = "1.0" }
+shellexpand = { version = "3.1" }
+tempdir = { version = "0.3" }
+thiserror = { version = "2.0" }
+
+[workspace.lints.clippy]
+cargo = { level = "warn", priority = 0 }
+missing_errors_doc = { level = "allow", priority = 1 }
+multiple_crate_versions = { level = "allow", priority = 1 }
+nursery = { level = "warn", priority = 0 }
+pedantic = { level = "warn", priority = 0 }
+
+[profile.release]
+codegen-units = 1
+lto = true
+panic = "abort"
+strip = "symbols"
